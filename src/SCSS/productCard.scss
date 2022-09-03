@@ -6,13 +6,12 @@
     height: 400px;
     width: 15%;
     border: 2px solid black;
-    border-radius: 9%;
-    transition: ease-in-out 0.2s;
+    border-radius: 5%;
+    transition: transform 300ms ease-in-out;
 }
 
 .prdcrd-container:hover{
-    width: 16%;
-    height: 420px;
+    transform: scale(1.05);
     cursor: pointer;
-    transition: ease-in-out 0.2s;
+    transition: transform 300ms ease-in-out;
 }

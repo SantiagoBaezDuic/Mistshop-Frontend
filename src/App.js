@@ -1,4 +1,4 @@
-import './App.css';
+import "./SCSS/App.scss";
 import Header from './Components/Header';
 import ProductDisplay from './Components/ProductDisplay';
 
