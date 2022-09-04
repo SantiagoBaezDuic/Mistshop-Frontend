@@ -4,7 +4,7 @@ export const AppContext = createContext();
 
 export default function AppProvider({ children }){
     const [admin, setAdmin] = useState(true);
-    const [logged, setLogged] = useState(false);
+    const [logged, setLogged] = useState(true);
 
     return(
         <AppContext.Provider value={{ admin, setAdmin, logged, setLogged }}>{children}</AppContext.Provider>
