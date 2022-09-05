@@ -5,10 +5,10 @@ export default function UnloggedOptions() {
     return(
         <div className="signarea-subcontainer">
             <Link to="/login">
-                <span>LOGIN</span>
+                <span className="text-link">LOGIN</span>
             </Link>
             <Link to="/register">
-                <span>REGISTER</span>
+                <span className="text-link">REGISTER</span>
             </Link>
         </div>
     )

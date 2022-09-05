@@ -2,3 +2,12 @@
     font-family: 'Uncial Antiqua', cursive;
     background-image: url("https://w7.pngwing.com/pngs/932/340/png-transparent-stone-wall-brickwork-tile-wall-texture-building-leather-thumbnail.png");
 }
+
+.text-link{
+    text-decoration: none;
+    color: white;
+}
+
+.text-link:hover{
+    text-decoration: underline;
+}

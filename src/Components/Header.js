@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../SCSS/header.scss";
 import SignArea from "./SignArea";
 
@@ -5,9 +6,9 @@ export default function Header() {
     return(
     <div className="hdr-container">
         <div className="hdr-logo-container">
-            <a href="/">
-                <img height={100} src="./img/harmony.svg" alt="logo"></img>
-            </a>
+            <Link to="/">
+                <img height={80} src="./img/harmony.svg" alt="logo"></img>
+            </Link>
             <h1 className="hdr-title">Mistshop</h1>
         </div>
         <SignArea />

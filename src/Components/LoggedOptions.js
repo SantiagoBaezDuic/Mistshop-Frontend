@@ -10,10 +10,10 @@ export default function LoggedOptions() {
         <div className="signarea-subcontainer">
             {admin ? <Link to="/admin">ADMIN</Link> : null}
             <Link to="/cart">
-                <span>CART</span>
+                <span className="text-link">CART</span>
             </Link>
             <Link to="/">
-                <span>LOGOUT</span>
+                <span className="text-link">LOGOUT</span>
             </Link>
         </div>
     )
