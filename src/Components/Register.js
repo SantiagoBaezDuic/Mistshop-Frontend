@@ -39,7 +39,7 @@ export default function Register() {
         }
     }
 
-    const registerAttempt = () => {
+    const registerAttempt = async () => {
         if(emptyInputs()) {
             if(emailValidation() === false){
                 alert("Invalid email")
@@ -47,10 +47,20 @@ export default function Register() {
                 let object = {
                     username: username,
                     email: email,
-                    password: password
+                    password: password,
+                    admin: false
                 }
         
-                console.log(object);
+                const resp = await fetch(`${process.env.REACT_APP_DATABASE_STRING}/register`, {
+                    method: `POST`,
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(object)
+                })
+
+                console.log(resp);
             }
         } else {
             alert("Empty fields")

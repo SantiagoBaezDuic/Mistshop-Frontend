@@ -22,14 +22,28 @@ export default function Login() {
         }
     }
 
-    const loginAttempt = () => {
+    const loginAttempt = async () => {
+        if(emptyInputs()){
+            let object = {
+                email: email,
+                password: password
+            }
+    
+            const resp = await fetch(`${process.env.REACT_APP_DATABASE_STRING}/login`, {
+                method: `POST`,
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(object)
+            })
 
-        let object = {
-            email: email,
-            password: password
+            const content = await resp.json();
+    
+            console.log(content);
+        } else {
+            alert("Inputs empty")
         }
-
-        console.log(object);
     }
 
     return(
