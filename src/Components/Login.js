@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../SCSS/login.scss";
+import { useContext } from "react";
+import { AppContext } from "../Context/AppContext";
 
 export default function Login() {
+    const {setAdmin, setLogged} = useContext(AppContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
@@ -39,8 +44,16 @@ export default function Login() {
             })
 
             const content = await resp.json();
-    
-            console.log(content);
+
+            if(content.response.state === "success"){
+                setLogged(true);
+                if(content.response.admin){
+                    setAdmin(true);
+                }
+                navigate("/");
+            } else {
+                alert("Invalid Credentials")
+            }
         } else {
             alert("Inputs empty")
         }

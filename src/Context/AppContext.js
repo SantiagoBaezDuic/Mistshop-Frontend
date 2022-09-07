@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const AppContext = createContext();
 
 export default function AppProvider({ children }){
-    const [admin, setAdmin] = useState(true);
+    const [admin, setAdmin] = useState(false);
     const [logged, setLogged] = useState(false);
 
     return(

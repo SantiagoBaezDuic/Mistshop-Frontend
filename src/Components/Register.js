@@ -23,10 +23,9 @@ export default function Register() {
         const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
 
         if(emailRegex.test(email)){
-            console.log("email valido")
             return true;
         } else {
-            console.log("email no valido")
+            alert("Ingrese un email válido");
             return false;
         }
     }
@@ -48,7 +47,6 @@ export default function Register() {
                     username: username,
                     email: email,
                     password: password,
-                    admin: false
                 }
         
                 const resp = await fetch(`${process.env.REACT_APP_DATABASE_STRING}/register`, {
@@ -60,7 +58,9 @@ export default function Register() {
                     body: JSON.stringify(object)
                 })
 
-                console.log(resp);
+                const content = await resp.json();
+
+                console.log(content);
             }
         } else {
             alert("Empty fields")
@@ -73,7 +73,7 @@ export default function Register() {
                 <input onChange={handleUsername} value={username} type="username" placeholder="username" />
                 <input onChange={handleEmail} value={email} type="email" placeholder="email" />
                 <input onChange={handlePassword} value={password} type="password" placeholder="password" />
-                <button onClick={registerAttempt}>LOGIN</button>
+                <button onClick={registerAttempt}>REGISTER</button>
             </div>
             <Link to="/">
                 <span className="text-link">GO BACK</span>
