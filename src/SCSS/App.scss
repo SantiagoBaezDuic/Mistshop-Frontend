@@ -11,3 +11,18 @@
 .text-link:hover{
     text-decoration: underline;
 }
+
+.goback-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goback-container img {
+    margin-left: 35px;
+}
+
+.main-container{
+    min-height: 100vh;
+}

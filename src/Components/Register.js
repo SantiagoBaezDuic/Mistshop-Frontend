@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../SCSS/register.scss";
+import Header from "./Header.js";
+import GoBack from "./GoBack.js";
 
 export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
+
+    const navigate = useNavigate();
 
     const handleUsername = (e) => {
         setUsername(e.target.value);
@@ -60,7 +64,12 @@ export default function Register() {
 
                 const content = await resp.json();
 
-                console.log(content);
+                if(content.state === "success"){
+                    console.log("Register successful");
+                    navigate("/login");
+                } else if (content.state === "failure") {
+                    console.log("Email already in use");
+                }
             }
         } else {
             alert("Empty fields")
@@ -69,15 +78,26 @@ export default function Register() {
 
     return(
         <div className="register-container">
+            <Header />
+            <GoBack string="/" />
+            <div className="register-subcontainer">
+                <h1 className="register-title">REGISTER</h1>
                 <div className="register-inputcontainer">
-                <input onChange={handleUsername} value={username} type="username" placeholder="username" />
-                <input onChange={handleEmail} value={email} type="email" placeholder="email" />
-                <input onChange={handlePassword} value={password} type="password" placeholder="password" />
-                <button onClick={registerAttempt}>REGISTER</button>
+                    <div className="register-inputuppertxt">
+                        <span>Username</span>
+                    </div>
+                    <input onChange={handleUsername} value={username} type="username" placeholder="username" />
+                    <div className="register-inputuppertxt">
+                        <span>Email</span>
+                    </div>
+                    <input onChange={handleEmail} value={email} type="email" placeholder="email" />
+                    <div className="register-inputuppertxt">
+                        <span>Password</span>
+                    </div>
+                    <input onChange={handlePassword} value={password} type="password" placeholder="password" />
+                    <button onClick={registerAttempt}>REGISTER</button>
+                </div>
             </div>
-            <Link to="/">
-                <span className="text-link">GO BACK</span>
-            </Link>
         </div>
     )
 }

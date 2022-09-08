@@ -1,8 +1,23 @@
 .prddply-container{
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    min-height: 70vh;
+    align-items: center;
+    min-height: 80vh;
     height: 100%;
     width: 100%;
-    padding: 30px 0px;
+}
+
+.prddply-title{
+    color: white;
+    text-decoration: underline;
+}
+
+.prddply-subcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0px 50px 0px;
 }

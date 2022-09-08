@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../SCSS/header.scss";
 import SignArea from "./SignArea";
 
-export default function Header() {
+export default function Header({ options }) {
     return(
     <div className="hdr-container">
         <div className="hdr-logo-container">
@@ -11,6 +11,6 @@ export default function Header() {
             </Link>
             <h1 className="hdr-title">Mistshop</h1>
         </div>
-        <SignArea />
+        {options ? <SignArea /> : null}
     </div>)
 }

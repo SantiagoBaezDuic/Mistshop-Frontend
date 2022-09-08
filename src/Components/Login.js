@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../SCSS/login.scss";
 import { useContext } from "react";
 import { AppContext } from "../Context/AppContext";
+import Header from "./Header";
+import GoBack from "./GoBack.js";
 
 export default function Login() {
-    const {setAdmin, setLogged} = useContext(AppContext);
+    const {setAdmin, setLogged, setCurrentEmail} = useContext(AppContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -47,8 +49,10 @@ export default function Login() {
 
             if(content.response.state === "success"){
                 setLogged(true);
+                setCurrentEmail(email);
                 if(content.response.admin){
                     setAdmin(true);
+                    console.log("admin");
                 }
                 navigate("/");
             } else {
@@ -61,14 +65,22 @@ export default function Login() {
 
     return(
         <div className="login-container">
+            <Header />
+            <GoBack string="/" />
+            <div className="login-subcontainer">
+                <h1 className="login-title">LOGIN</h1>
                 <div className="login-inputcontainer">
-                <input onChange={handleEmail} value={email} type="email" placeholder="email" />
-                <input onChange={handlePassword} value={password} type="password" placeholder="password" />
-                <button onClick={loginAttempt}>LOGIN</button>
+                    <div className="login-inputuppertxt">
+                        Email
+                    </div>
+                    <input onChange={handleEmail} value={email} type="email" placeholder="email" />
+                    <div className="login-inputuppertxt">
+                        Password
+                    </div>
+                    <input onChange={handlePassword} value={password} type="password" placeholder="password" />
+                    <button onClick={loginAttempt}>LOGIN</button>
+                </div>
             </div>
-            <Link to="/">
-                <span className="text-link">GO BACK</span>
-            </Link>
         </div>
     )
 }
