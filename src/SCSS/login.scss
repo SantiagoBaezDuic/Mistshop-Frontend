@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40vh;
+    height: 45vh;
 }
 
 .login-title{
@@ -16,24 +16,38 @@
 }
 
 .login-inputcontainer{
-    width: 17%;
+    width: 23%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     height: 100%;
+    background-color: rgba(214, 214, 214, 0.582);
+    backdrop-filter: blur(3px);
+    border: 2px solid white;
+    border-radius: 5%;
+}
+
+.login-singleinput{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .login-inputcontainer input {
-    width: 100%;
-    height: 18px;
+    width: 80%;
+    height: 35px;
     color: white;
     background-color: black;
+    font-size: 17px;
 }
 
 .login-inputuppertxt{
     display: flex;
     justify-content: flex-start;
     color: white;
-    width: 100%;
+    width: 80%;
+    font-size: 20px;
 }

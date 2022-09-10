@@ -1,28 +1,28 @@
 .prdcrd-container{
+    width: 20%;
+    height: 500px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prdcrd-subcontainer{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
-    width: 16%;
+    height: 100%;
+    width: 80%;
     border: 2px solid white;
     border-radius: 5%;
-    transition: transform 300ms ease-in-out;
     background-color: rgba(214, 214, 214, 0.582);
     backdrop-filter: blur(3px);
-}
-
-.prdcrd-container:hover{
-    transform: scale(1.05);
-    cursor: pointer;
-    transition: transform 300ms ease-in-out;
 }
 
 .prdcrd-namecont{
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .prdcrd-name{

@@ -1,0 +1,33 @@
+.prcrd-tocartcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.prdcrd-cartbuttons{
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 55%;
+}
+
+.prdcrd-symbolcontainer{
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.prdcrd-counter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

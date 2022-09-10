@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../SCSS/register.scss";
 import Header from "./Header.js";
 import GoBack from "./GoBack.js";
@@ -83,19 +83,26 @@ export default function Register() {
             <div className="register-subcontainer">
                 <h1 className="register-title">REGISTER</h1>
                 <div className="register-inputcontainer">
-                    <div className="register-inputuppertxt">
-                        <span>Username</span>
+                    <div className="register-singleinput">
+                        <div className="register-inputuppertxt">
+                            <span>Username</span>
+                        </div>
+                        <input onChange={handleUsername} value={username} type="username" placeholder="Username" autoFocus/>
                     </div>
-                    <input onChange={handleUsername} value={username} type="username" placeholder="username" />
-                    <div className="register-inputuppertxt">
-                        <span>Email</span>
+                    <div className="register-singleinput">
+                        <div className="register-inputuppertxt">
+                            <span>Email</span>
+                        </div>
+                        <input onChange={handleEmail} value={email} type="email" placeholder="Email" />
                     </div>
-                    <input onChange={handleEmail} value={email} type="email" placeholder="email" />
-                    <div className="register-inputuppertxt">
-                        <span>Password</span>
+                    <div className="register-singleinput">
+                        <div className="register-inputuppertxt">
+                            <span>Password</span>
+                        </div>
+                        <input onChange={handlePassword} value={password} type="password" placeholder="Password" />
                     </div>
-                    <input onChange={handlePassword} value={password} type="password" placeholder="password" />
                     <button onClick={registerAttempt}>REGISTER</button>
+                    <span className="text-center">Already have an account?, <Link className="text-link" to="/login">Sign up</Link></span>
                 </div>
             </div>
         </div>

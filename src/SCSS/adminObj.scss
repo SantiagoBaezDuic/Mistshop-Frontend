@@ -1,0 +1,17 @@
+.admin-objectcontainer{
+    width: 27%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 80%;
+    background-color: rgba(214, 214, 214, 0.582);
+    backdrop-filter: blur(3px);
+    border: 2px solid white;
+    border-radius: 5%;
+}
+
+.admin-success{
+    color: rgb(17, 253, 37);
+    font-size: 50px;
+}

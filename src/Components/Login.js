@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../SCSS/login.scss";
 import { useContext } from "react";
 import { AppContext } from "../Context/AppContext";
@@ -70,15 +70,20 @@ export default function Login() {
             <div className="login-subcontainer">
                 <h1 className="login-title">LOGIN</h1>
                 <div className="login-inputcontainer">
-                    <div className="login-inputuppertxt">
-                        Email
+                    <div className="login-singleinput">
+                        <div className="login-inputuppertxt">
+                            Email
+                        </div>
+                        <input onChange={handleEmail} value={email} type="email" placeholder="Email" autoFocus/>
                     </div>
-                    <input onChange={handleEmail} value={email} type="email" placeholder="email" />
-                    <div className="login-inputuppertxt">
-                        Password
+                    <div className="login-singleinput">
+                        <div className="login-inputuppertxt">
+                            Password
+                        </div>
+                        <input onChange={handlePassword} value={password} type="password" placeholder="Password" />
                     </div>
-                    <input onChange={handlePassword} value={password} type="password" placeholder="password" />
                     <button onClick={loginAttempt}>LOGIN</button>
+                    <span className="text-center">Don't have an account?, <Link className="text-link" to="/register">Register</Link></span>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import "../SCSS/adminView.scss";
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import GoBack from "./GoBack.js";
+import AdminObj from "./AdminObj";
 
 export default function AdminView() {
     const [name, setName] = useState("")
@@ -11,6 +12,7 @@ export default function AdminView() {
     const [stock, setStock] = useState("")
     const [desc, setDesc] = useState("");
     const [productsURL, setProductsURL] = useState(null)
+    const [obj, setObj] = useState(null);
 
     useEffect(() => {
         if(process.env.REACT_APP_DATABASE_STRING){
@@ -64,7 +66,20 @@ export default function AdminView() {
     
             const content = await resp.json();
     
-            console.log(content)
+            if(content.state === "failure"){
+                alert(`Product load failed. ${content.error}`)
+            } else {
+                setObj(content.obj)
+                setTimeout(() => {
+                    setObj(null)
+                    setName("")
+                    setPrice("")
+                    setThumbnail("")
+                    setCode("")
+                    setDesc("")
+                    setStock("")
+                }, 10000);
+            }
         } else {
             alert("Fields empty.");
         }
@@ -74,36 +89,48 @@ export default function AdminView() {
         <div className="admin-container">
             <Header />
             <GoBack string="/" />
+            <h4 className="admin-subtitle">Load New Product</h4>
             <div className="admin-subcontainer">
-                <h1 className="admin-title">ADMIN</h1>
-                <h2 className="admin-subtitle">Load New Product</h2>
                 <div className="admin-inputcontainer">
-                    <div className="admin-inputuppertxt">
-                        Name
+                    <div className="admin-singleinput">
+                        <div className="admin-inputuppertxt">
+                            Name
+                        </div>
+                        <input value={name} onChange={handleName} type="text" placeholder="Name"/>
                     </div>
-                    <input value={name} onChange={handleName} type="text" placeholder="name"/>
-                    <div className="admin-inputuppertxt">
-                        Price
+                    <div className="admin-singleinput">
+                        <div className="admin-inputuppertxt">
+                            Price
+                        </div>
+                        <input value={price} onChange={handlePrice} type="number" placeholder="Price"/>
                     </div>
-                    <input value={price} onChange={handlePrice} type="number" placeholder="price"/>
-                    <div className="admin-inputuppertxt">
-                        Image URL
+                    <div className="admin-singleinput">
+                        <div className="admin-inputuppertxt">
+                            Image URL
+                        </div>
+                        <input value={thumbnail} onChange={handleThumbnail} type="text" placeholder="Thumbnail"/>
                     </div>
-                    <input value={thumbnail} onChange={handleThumbnail} type="text" placeholder="thumbnail"/>
-                    <div className="admin-inputuppertxt">
-                        Code
+                    <div className="admin-singleinput">
+                        <div className="admin-inputuppertxt">
+                            Code
+                        </div>
+                        <input value={code} onChange={handleCode} type="number" placeholder="Code" />
                     </div>
-                    <input value={code} onChange={handleCode} type="number" placeholder="code" />
-                    <div className="admin-inputuppertxt">
-                        Description
+                    <div className="admin-singleinput">
+                        <div className="admin-inputuppertxt">
+                            Description
+                        </div>
+                        <input value={desc} onChange={handleDescription} type="text" placeholder="Description" />
                     </div>
-                    <input value={desc} onChange={handleDescription} type="text" placeholder="description" />
-                    <div className="admin-inputuppertxt">
-                        Stock
+                    <div className="admin-singleinput">
+                        <div className="admin-inputuppertxt">
+                            Stock
+                        </div>
+                        <input value={stock} onChange={handleStock} type="number" placeholder="Stock"/>
                     </div>
-                    <input value={stock} onChange={handleStock} type="number" placeholder="stock"/>
                     <button onClick={sendProduct}>SUBMIT</button>
                 </div>
+                {obj !== null ? <AdminObj obj={obj} /> : null}
             </div>
         </div>
     )
