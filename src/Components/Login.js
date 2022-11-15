@@ -49,6 +49,8 @@ export default function Login() {
             const content = await resp.json();
 
             if(content.response.state === "success"){
+                console.log(content.response);
+                localStorage.setItem("token", content.response.token);
                 setLogged(true);
                 if(content.response.admin){
                     setAdmin(true);

@@ -5,8 +5,14 @@ import Register from "./Register";
 import Login from "./Login";
 import Cart from "./Cart";
 import AdminView from "./AdminView";
+import io from 'socket.io-client';
 
 function App() {
+
+  const socket = io();
+
+  console.log(socket);
+
   return (
     <div className="App">
       <Routes>

@@ -20,6 +20,8 @@ export default function LoggedOptions() {
             setAdmin(false);
             setLogged(false);
             navigate("/");
+            localStorage.removeItem("token");
+            console.log("Logout succesful");
         } else {
             alert("Logout failed.")
         }
