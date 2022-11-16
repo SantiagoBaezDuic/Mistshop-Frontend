@@ -11,9 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  // const socket = socketIO.connect(process.env.REACT_APP_DATABASE_STRING);
+  const socket = socketIO();
 
-  // console.log(socket);
+  console.log(socket);
 
   return (
     <div className="App">
