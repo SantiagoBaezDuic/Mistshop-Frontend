@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import GoBack from "./GoBack.js";
 import AdminObj from "./AdminObj";
+import { toast } from "react-toastify"
 
 export default function AdminView() {
     const [name, setName] = useState("")
@@ -11,6 +12,7 @@ export default function AdminView() {
     const [code, setCode] = useState("")
     const [stock, setStock] = useState("")
     const [desc, setDesc] = useState("");
+    const [type, setType] = useState("");
     const [productsURL, setProductsURL] = useState(null)
     const [obj, setObj] = useState(null);
 
@@ -44,6 +46,10 @@ export default function AdminView() {
         setDesc(e.target.value)
     }
 
+    const handleType = (e) => {
+        setType(e.target.value)
+    }
+
     const sendProduct = async () => {
         if(name !== "" && price !== "" && thumbnail !== "" && code !== "" && desc !== "" && stock !== ""){
             let object = {
@@ -52,14 +58,16 @@ export default function AdminView() {
                 thumbnail: thumbnail,
                 code: code,
                 description: desc,
-                stock: stock
+                stock: stock,
+                type: type
             }
     
             const resp = await fetch(productsURL, {
                 method: `POST`,
                 headers: {
                     "Accept": "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify(object)
             })
@@ -67,7 +75,17 @@ export default function AdminView() {
             const content = await resp.json();
     
             if(content.state === "failure"){
-                alert(`Product load failed. ${content.error}`)
+                toast.error('🦄 Product load failed!, check console', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                console.log(`Product load failed. ${content.error}`)
             } else {
                 setObj(content.obj)
                 setTimeout(() => {
@@ -78,10 +96,20 @@ export default function AdminView() {
                     setCode("")
                     setDesc("")
                     setStock("")
+                    setType("")
                 }, 10000);
             }
         } else {
-            alert("Fields empty.");
+            toast.error('❗ Fields empty', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "dark",
+            });
         }
     }
 
@@ -127,6 +155,12 @@ export default function AdminView() {
                             Stock
                         </div>
                         <input value={stock} onChange={handleStock} type="number" placeholder="Stock"/>
+                    </div>
+                    <div className="admin-singleinput">
+                        <div className="admin-inputuppertxt">
+                            Type
+                        </div>
+                        <input value={type} onChange={handleType} type="text" placeholder="Type"/>
                     </div>
                     <button onClick={sendProduct}>SUBMIT</button>
                 </div>

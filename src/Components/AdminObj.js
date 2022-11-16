@@ -12,6 +12,7 @@ export default function AdminObj({obj}) {
                 <h4>Price: ${obj.price}</h4>
                 <h4>Code: {obj.code}</h4>
                 <h4>Stock: {obj.stock}</h4>
+                <h4>Type: {obj.type}</h4>
             </div>
         </>
     )

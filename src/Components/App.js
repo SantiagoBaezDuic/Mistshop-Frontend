@@ -5,13 +5,15 @@ import Register from "./Register";
 import Login from "./Login";
 import Cart from "./Cart";
 import AdminView from "./AdminView";
-import io from 'socket.io-client';
+import socketIO from 'socket.io-client';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  const socket = io();
+  // const socket = socketIO.connect(process.env.REACT_APP_DATABASE_STRING);
 
-  console.log(socket);
+  // console.log(socket);
 
   return (
     <div className="App">
@@ -22,6 +24,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/admin" element={<AdminView />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

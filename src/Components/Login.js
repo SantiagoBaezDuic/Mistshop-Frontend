@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "../Context/AppContext";
 import Header from "./Header";
 import GoBack from "./GoBack.js";
+import { toast } from "react-toastify";
 
 export default function Login() {
     const {setAdmin, setLogged} = useContext(AppContext);
@@ -49,19 +50,45 @@ export default function Login() {
             const content = await resp.json();
 
             if(content.response.state === "success"){
-                console.log(content.response);
                 localStorage.setItem("token", content.response.token);
                 setLogged(true);
                 if(content.response.admin){
                     setAdmin(true);
-                    console.log("admin");
                 }
+                toast.success(' Successfully logged in!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "dark",
+                });
                 navigate("/");
             } else {
-                alert("Invalid Credentials")
+                toast.error(' Invalid credentials!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "dark",
+                });
             }
         } else {
-            alert("Inputs empty")
+            toast.error(' Inputs empty!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "dark",
+            });
         }
     }
 
@@ -87,17 +114,6 @@ export default function Login() {
                     <button onClick={loginAttempt}>LOGIN</button>
                     <span className="text-center">Don't have an account?, <Link className="text-link" to="/register">Register</Link></span>
                 </div>
-                {/* <form onSubmit={handleSubmit} action={`${process.env.REACT_APP_DATABASE_STRING}/login`} method="post">
-                    <div>
-                        <label htmlFor="email">Email:</label>
-                        <input id="email" type="email" name="email" required></input>
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password:</label>
-                        <input id="password" type="password" name="password" required></input>
-                    </div>
-                    <button type="submit">SUBMIT</button>
-                </form> */}
             </div>
         </div>
     )

@@ -7,6 +7,7 @@ import GoBack from "./GoBack.js";
 export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [secondPassword, setSecondPassword] = useState("");
     const [username, setUsername] = useState("");
 
     const navigate = useNavigate();
@@ -21,6 +22,10 @@ export default function Register() {
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
+    }
+
+    const handleSecondPassword = (e) => {
+        setSecondPassword(e.target.value);
     }
 
     const emailValidation = () => {
@@ -47,28 +52,32 @@ export default function Register() {
             if(emailValidation() === false){
                 alert("Invalid email")
             } else {
-                let object = {
-                    username: username,
-                    email: email,
-                    password: password,
-                }
-        
-                const resp = await fetch(`${process.env.REACT_APP_DATABASE_STRING}/register`, {
-                    method: `POST`,
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(object)
-                })
-
-                const content = await resp.json();
-
-                if(content.state === "success"){
-                    console.log("Register successful");
-                    navigate("/login");
-                } else if (content.state === "failure") {
-                    console.log("Email already in use");
+                if(password !== secondPassword){
+                    let object = {
+                        username: username,
+                        email: email,
+                        password: password,
+                    }
+            
+                    const resp = await fetch(`${process.env.REACT_APP_DATABASE_STRING}/register`, {
+                        method: `POST`,
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(object)
+                    })
+    
+                    const content = await resp.json();
+    
+                    if(content.state === "success"){
+                        console.log("Register successful");
+                        navigate("/login");
+                    } else if (content.state === "failure") {
+                        console.log("Email already in use");
+                    }
+                } else {
+                    alert("Passwords don't match")
                 }
             }
         } else {
@@ -100,6 +109,10 @@ export default function Register() {
                             <span>Password</span>
                         </div>
                         <input onChange={handlePassword} value={password} type="password" placeholder="Password" />
+                        <div className="register-inputuppertxt">
+                            <span>Repeat Password</span>
+                        </div>
+                        <input onChange={handleSecondPassword} value={secondPassword} type="repeat-password" placeholder="Repeat your password" />
                     </div>
                     <button onClick={registerAttempt}>REGISTER</button>
                     <span className="text-center">Already have an account?, <Link className="text-link" to="/login">Sign up</Link></span>

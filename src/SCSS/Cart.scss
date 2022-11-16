@@ -1,0 +1,24 @@
+.cart-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.cart-title{
+    color: white;
+    text-decoration: underline;
+}
+
+.cart-prodcont{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+}
+
+.cart-noproducts{
+    color: white;
+    margin: 25px 0px;
+}

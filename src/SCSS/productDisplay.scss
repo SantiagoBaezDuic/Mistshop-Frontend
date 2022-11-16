@@ -13,6 +13,18 @@
     text-decoration: underline;
 }
 
+.prddply-filter{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 90%;
+}
+
+.prddply-filter select{
+    color: white;
+    background-color: black;
+}
+
 .prddply-subcontainer{
     display: flex;
     flex-direction: row;

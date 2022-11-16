@@ -1,5 +1,6 @@
 import "../SCSS/productCartOpt.scss";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function ProductCartOpt({code}){
     const [count, setCount] = useState(0);
@@ -16,34 +17,49 @@ export default function ProductCartOpt({code}){
         }
     }
 
-    const sendToCart = () => {
-
-            //         let object = {
-            //         code: code,
-            //         email: currentEmail,
-            //         amount: count,
-            //         add: true
-            //     }
-        
-            //     const resp = await fetch(`${process.env.REACT_APP_DATABASE_STRING}/cart`, {
-            //         method: `POST`,
-            //         headers: {
-            //             "Accept": "application/json",
-            //             "Content-Type": "application/json"
-            //         },
-            //         body: JSON.stringify(object)
-            //     })
-        
-            //     const content = await resp.json();
-
-            // if(content.state !== "failure"){
-                console.log(`Added ${count} units of the product with code ${code}`)
-                setCount(0)
-            // } else {
-            //     alert(content.error)
-            // }
-        
-            //     console.log(content);
+    const sendToCart = async () => {
+        if(count > 0){
+            let object = {
+                code: code,
+                add: true,
+                amount: count,
+            }
+    
+            const resp = await fetch(`${process.env.REACT_APP_DATABASE_STRING}/cart`, {
+                method: `POST`,
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify(object)
+            })
+    
+            const content = await resp.json();
+            console.log(content);
+            setCount(0)
+            toast.success(' Item added to cart!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "dark",
+                });
+        } else {
+            toast.error(' Select an amount over 0', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "dark",
+                });
+        }
     } 
 
     return (
