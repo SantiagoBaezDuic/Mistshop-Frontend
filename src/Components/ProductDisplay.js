@@ -33,7 +33,7 @@ export default function ProductDisplay() {
 
     useEffect(() => {
         getProducts(filter);
-    }, [filter, data])
+    }, [filter])
 
     return(
         <div className="prddply-container">
