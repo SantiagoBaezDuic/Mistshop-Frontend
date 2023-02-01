@@ -15,9 +15,10 @@ export default function ProductDisplay() {
         } else {
             productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
         }
-        console.log(productsURL);
         const response = await fetch(productsURL)
+        console.log("response: ", response)
         const data = await response.json()
+        console.log("data: ", data)
         setData(data);
         if(catalogue === null){
             setCatalogue(data);
