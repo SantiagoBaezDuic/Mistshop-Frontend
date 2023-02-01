@@ -18,7 +18,6 @@ export default function ProductDisplay() {
         fetch('https://mistshop-backend.vercel.app/products/category/all')
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             setData(data)
         })
         .catch(err => console.error(err))
@@ -29,6 +28,7 @@ export default function ProductDisplay() {
 
     const handleFilter = (e) => {
         setFilter(e.target.value);
+        getProducts(filter);
     }
 
     useEffect(() => {
