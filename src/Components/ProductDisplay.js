@@ -15,9 +15,26 @@ export default function ProductDisplay() {
         } else {
             productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
         }
-        const response = await fetch(productsURL).body;
-        console.log(response);
-        const data = await response.json();
+        const response = await fetch(productsURL);
+        const reader = response.body.getReader();
+        const xd = new ReadableStream({
+            start(controller) {
+              return pump();
+              function pump() {
+                return reader.read().then(({ done, value }) => {
+                  // When no more data needs to be consumed, close the stream
+                  if (done) {
+                    controller.close();
+                    return;
+                  }
+                  // Enqueue the next data chunk into our target stream
+                  controller.enqueue(value);
+                  return pump();
+                });
+              }
+            }
+          })
+        console.log(xd);
         setData(data);
         if(catalogue === null){
             setCatalogue(data);
