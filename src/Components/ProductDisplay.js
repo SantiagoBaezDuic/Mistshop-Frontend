@@ -16,26 +16,7 @@ export default function ProductDisplay() {
             productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
         }
         const response = await fetch(productsURL);
-        const reader = response.body.getReader();
-        const xd = new ReadableStream({
-            start(controller) {
-              return pump();
-              function pump() {
-                return reader.read().then(({ done, value }) => {
-                  // When no more data needs to be consumed, close the stream
-                  if (done) {
-                    controller.close();
-                    return;
-                  }
-                  // Enqueue the next data chunk into our target stream
-                  controller.enqueue(value);
-                  return pump();
-                });
-              }
-            }
-          })
-        const xd2 = new Response(xd);
-        console.log(xd2)
+        const data = await response.json();
         setData(data);
         if(catalogue === null){
             setCatalogue(data);
