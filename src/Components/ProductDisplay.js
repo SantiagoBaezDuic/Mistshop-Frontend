@@ -17,6 +17,7 @@ export default function ProductDisplay() {
         }
         fetch(productsURL)
         .then((resp) => resp.json())
+        .then((xd) => console.log(xd))
         .then((data) => setData(data))
         .then(() => console.log("data: ", data))
         if(catalogue === null){
