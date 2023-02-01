@@ -4,31 +4,23 @@ import ProductCard from "./ProductCard";
 import "../SCSS/productDisplay.scss";
 
 export default function ProductDisplay() {
-    const {catalogue, setCatalogue} = useContext(AppContext);
+    const {setCatalogue} = useContext(AppContext);
     const [data, setData] = useState(null);
     const [filter, setFilter] = useState("all")
 
     const getProducts = async (category) => {
-        let productsURL = "";
-        if(category){
-            productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products/category/${category}`;
-        } else {
-            productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
-        }
-        fetch('https://mistshop-backend.vercel.app/products/category/all')
+        let productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products/category/${category}`;
+        fetch(productsURL)
         .then(resp => resp.json())
         .then(data => {
             setData(data)
         })
         .catch(err => console.error(err))
-        if(catalogue === null){
-            setCatalogue(data);
-        }
+        setCatalogue(data);
     }
 
     const handleFilter = (e) => {
         setFilter(e.target.value);
-        getProducts(filter);
     }
 
     useEffect(() => {
