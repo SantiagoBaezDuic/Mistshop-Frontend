@@ -34,7 +34,8 @@ export default function ProductDisplay() {
               }
             }
           })
-        console.log(xd);
+        const xd2 = new Response(xd);
+        console.log(xd2)
         setData(data);
         if(catalogue === null){
             setCatalogue(data);
