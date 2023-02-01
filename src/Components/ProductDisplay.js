@@ -15,19 +15,20 @@ export default function ProductDisplay() {
         } else {
             productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
         }
+        console.log(productsURL)
         fetch(productsURL)
         .then(resp => resp.json())
         .then(data => {
             setData(data)
         })
         .catch(err => console.error(err))
-        setCatalogue(data);
+        if(catalogue === null){
+            setCatalogue(data);
+        }
     }
 
     const handleFilter = (e) => {
         setFilter(e.target.value);
-        getProducts(filter);
-        console.log(catalogue)
     }
 
     useEffect(() => {
