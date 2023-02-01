@@ -4,12 +4,17 @@ import ProductCard from "./ProductCard";
 import "../SCSS/productDisplay.scss";
 
 export default function ProductDisplay() {
-    const {setCatalogue} = useContext(AppContext);
+    const {catalogue, setCatalogue} = useContext(AppContext);
     const [data, setData] = useState(null);
     const [filter, setFilter] = useState("all")
 
     const getProducts = async (category) => {
-        let productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products/category/${category}`;
+        let productsURL = "";
+        if(category){
+            productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products/category/${category}`;
+        } else {
+            productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
+        }
         fetch(productsURL)
         .then(resp => resp.json())
         .then(data => {
@@ -21,11 +26,13 @@ export default function ProductDisplay() {
 
     const handleFilter = (e) => {
         setFilter(e.target.value);
+        getProducts(filter);
+        console.log(catalogue)
     }
 
     useEffect(() => {
         getProducts(filter);
-    }, [filter])
+    }, [filter, data])
 
     return(
         <div className="prddply-container">
