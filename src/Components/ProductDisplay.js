@@ -15,11 +15,13 @@ export default function ProductDisplay() {
         } else {
             productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
         }
-        const response = await fetch(productsURL);
-        const json = JSON.stringify(response.body);
-        console.log(json)
-        const data = await response.json();
-        setData(data);
+        fetch('https://mistshop-backend.vercel.app/products/category/all')
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            setData(data)
+        })
+        .catch(err => console.error(err))
         if(catalogue === null){
             setCatalogue(data);
         }
