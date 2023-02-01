@@ -15,14 +15,11 @@ export default function ProductDisplay() {
         } else {
             productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
         }
-        fetch(productsURL)
-        .then((resp) => resp.json())
-        .then((xd) => console.log(xd))
-        .then((data) => setData(data))
-        .then(() => console.log("data: ", data))
+        const response = await fetch(productsURL);
+        const data = response.json();
+        setData(data);
         if(catalogue === null){
             setCatalogue(data);
-            console.log(catalogue);
         }
     }
 
