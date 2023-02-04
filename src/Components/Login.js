@@ -56,8 +56,8 @@ export default function Login() {
                     setAdmin(true);
                 }
                 toast.success(' Successfully logged in!', {
-                    position: "top-right",
-                    autoClose: 3000,
+                    position: "bottom-right",
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -68,8 +68,8 @@ export default function Login() {
                 navigate("/");
             } else {
                 toast.error(' Invalid credentials!', {
-                    position: "top-right",
-                    autoClose: 3000,
+                    position: "bottom-right",
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -80,8 +80,8 @@ export default function Login() {
             }
         } else {
             toast.error(' Inputs empty!', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

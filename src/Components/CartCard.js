@@ -30,8 +30,8 @@ export default function CartCard({obj}){
         const content = await resp.json();
         if(content.state === "success"){
             toast.success(' Item deleted from cart!', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -42,8 +42,8 @@ export default function CartCard({obj}){
             navigate("/")
         } else {
             toast.error(' Error deleting item', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -59,7 +59,7 @@ export default function CartCard({obj}){
         if(catalogue !== null){
             const item = catalogue.find((el) => el.code === obj.code)
             if(item === undefined){
-                console.log("Item not in catalogue.")
+                console.alert("Item not in catalogue.")
             } else {
                 setProd(item)
             }
@@ -72,6 +72,7 @@ export default function CartCard({obj}){
             <div className="cartcard-info">
                 <h3>{prod.name}</h3>
                 <span>{`X${obj.amount}`}</span>
+                <span>{`$${obj.price * obj.amount}`}</span>
             </div>
             <button onClick={deleteFromCart}>Eliminar</button>
             </div> : null}

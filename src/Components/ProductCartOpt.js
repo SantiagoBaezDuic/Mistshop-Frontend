@@ -36,11 +36,11 @@ export default function ProductCartOpt({code}){
             })
     
             const content = await resp.json();
-            console.log(content);
+            console.log(content)
             setCount(0)
             toast.success(' Item added to cart!', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -50,8 +50,8 @@ export default function ProductCartOpt({code}){
                 });
         } else {
             toast.error(' Select an amount over 0', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

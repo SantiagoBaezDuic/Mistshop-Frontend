@@ -76,8 +76,8 @@ export default function AdminView() {
     
             if(content.state === "failure"){
                 toast.error('🦄 Product load failed!, check console', {
-                    position: "top-right",
-                    autoClose: 3000,
+                    position: "bottom-right",
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -85,7 +85,7 @@ export default function AdminView() {
                     progress: undefined,
                     theme: "dark",
                 });
-                console.log(`Product load failed. ${content.error}`)
+                console.alert(`Product load failed. ${content.error}`)
             } else {
                 setObj(content.obj)
                 setTimeout(() => {
@@ -101,8 +101,8 @@ export default function AdminView() {
             }
         } else {
             toast.error('❗ Fields empty', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "../SCSS/register.scss";
 import Header from "./Header.js";
 import GoBack from "./GoBack.js";
+import { toast } from "react-toastify";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -71,10 +72,28 @@ export default function Register() {
                     const content = await resp.json();
     
                     if(content.state === "success"){
-                        console.log("Register successful");
+                        toast('Registered successfully!', {
+                            position: "bottom-right",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: false,
+                            progress: undefined,
+                            theme: "dark",
+                        });
                         navigate("/login");
                     } else if (content.state === "failure") {
-                        console.log("Email already in use");
+                        toast.error('❗ Error submitting order', {
+                            position: "bottom-right",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: false,
+                            progress: undefined,
+                            theme: "dark",
+                        });
                     }
                 } else {
                     alert("Passwords don't match")

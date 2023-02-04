@@ -1,4 +1,5 @@
 import "../SCSS/Cart.scss";
+import "../SCSS/CartCard.scss";
 import { useEffect, useState, useContext } from "react"
 import Header from "./Header";
 import GoBack from "./GoBack.js";
@@ -9,7 +10,8 @@ import { toast } from "react-toastify";
 
 export default function Cart() {
     const [products, setProducts] = useState(null);
-    const {cartUpdate, catalogue} = useContext(AppContext);
+    const {catalogue} = useContext(AppContext);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const navigate = useNavigate();
 
@@ -24,8 +26,19 @@ export default function Cart() {
         })
 
         const content = await resp.json();
+        console.log(content)
         if(content[0].products.length > 0){
             setProducts(content[0].products);
+        }
+
+        if(products !== null){
+            products.map((obj) => {
+                console.log("total", totalPrice)
+                let newPrice = totalPrice + (obj.price * obj.amount);
+                console.log("newp", newPrice);
+                setTotalPrice(newPrice);
+                console.log("newtotal", totalPrice);
+            })
         }
     }
 
@@ -53,8 +66,8 @@ export default function Cart() {
         const content = await resp.json();
         if(content.state !== `success`){
             toast.error('❗ Error submitting order', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -64,8 +77,8 @@ export default function Cart() {
             });
         } else {
             toast('🦄 Order submitted!', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -79,7 +92,7 @@ export default function Cart() {
 
     useEffect(() => {
         getCart();
-    }, [cartUpdate])
+    }, [])
 
     return(
         <div className="cart-container">
@@ -90,6 +103,7 @@ export default function Cart() {
                 {products !== null ? products.map((obj) => {
                     return(<CartCard key={obj.code} obj={obj} />)
                 }) : <div className="cart-noproducts">No products in cart</div>}
+                {/* <div className="cartcard-container">{`Cart price: $${totalPrice}`}</div> */}
             </div>
             <button onClick={finishOrder}>Confirm order</button>
         </div>

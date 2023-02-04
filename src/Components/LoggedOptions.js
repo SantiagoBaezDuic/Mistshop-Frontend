@@ -27,8 +27,8 @@ export default function LoggedOptions() {
             navigate("/");
             localStorage.removeItem("token");
             toast.success(' Logout successful!', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -38,8 +38,8 @@ export default function LoggedOptions() {
             });
         } else {
             toast.error(' Logout failed!', {
-                position: "top-right",
-                autoClose: 3000,
+                position: "bottom-right",
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

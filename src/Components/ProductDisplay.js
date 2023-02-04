@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 import "../SCSS/productDisplay.scss";
 
 export default function ProductDisplay() {
-    const {catalogue, setCatalogue} = useContext(AppContext);
+    const {setCatalogue} = useContext(AppContext);
     const [data, setData] = useState(null);
     const [filter, setFilter] = useState("all")
 
@@ -15,16 +15,13 @@ export default function ProductDisplay() {
         } else {
             productsURL = `${process.env.REACT_APP_DATABASE_STRING}/products`;
         }
-        console.log(productsURL)
         fetch(productsURL)
         .then(resp => resp.json())
         .then(data => {
             setData(data)
+            setCatalogue(data);
         })
         .catch(err => console.error(err))
-        if(catalogue === null){
-            setCatalogue(data);
-        }
     }
 
     const handleFilter = (e) => {
