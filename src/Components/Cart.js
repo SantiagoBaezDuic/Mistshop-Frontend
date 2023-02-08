@@ -26,20 +26,7 @@ export default function Cart() {
         })
 
         const content = await resp.json();
-        console.log(content)
-        if(content[0].products.length > 0){
-            setProducts(content[0].products);
-        }
-
-        if(products !== null){
-            products.map((obj) => {
-                console.log("total", totalPrice)
-                let newPrice = totalPrice + (obj.price * obj.amount);
-                console.log("newp", newPrice);
-                setTotalPrice(newPrice);
-                console.log("newtotal", totalPrice);
-            })
-        }
+        setProducts(content);
     }
 
     async function finishOrder() {

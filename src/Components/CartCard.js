@@ -59,7 +59,7 @@ export default function CartCard({obj}){
         if(catalogue !== null){
             const item = catalogue.find((el) => el.code === obj.code)
             if(item === undefined){
-                console.alert("Item not in catalogue.")
+                console.error("Item not in catalogue.")
             } else {
                 setProd(item)
             }
