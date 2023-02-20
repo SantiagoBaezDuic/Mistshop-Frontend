@@ -26,7 +26,8 @@ export default function Cart() {
         })
 
         const content = await resp.json();
-        setProducts(content);
+        setProducts(content.products);
+        setTotalPrice(content.price);
     }
 
     async function finishOrder() {
@@ -90,7 +91,7 @@ export default function Cart() {
                 {products !== null ? products.map((obj) => {
                     return(<CartCard key={obj.code} obj={obj} />)
                 }) : <div className="cart-noproducts">No products in cart</div>}
-                {/* <div className="cartcard-container">{`Cart price: $${totalPrice}`}</div> */}
+                <div className="cartcard-container">{`Cart price: $${totalPrice}`}</div>
             </div>
             <button onClick={finishOrder}>Confirm order</button>
         </div>
